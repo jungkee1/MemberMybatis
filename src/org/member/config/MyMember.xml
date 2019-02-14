@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper     
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="org.member.config.MyMember">
+	
+	
+	<!--추가하기  -->
+	<insert id="insertMember" parameterType="org.member.mybatis.vo.MemberVO">
+		insert into springmember(id,name,pass,addr,memo,reg_date) values(#{id},#{name},#{pass},#{addr},#{memo},sysdate)
+	</insert>
+	
+	<!--전체보기  -->
+	<select id="listMember" resultType="org.member.mybatis.vo.MemberVO">
+		select * from springmember
+	</select>
+	
+	<!--삭제하기  -->
+	<delete id="deleteMember" parameterType="String">
+		delete from springmember where id = #{id}
+	</delete>
+	
+	<!--상세보기  -->
+	<select id="detailMember" parameterType="String" resultType="org.member.mybatis.vo.MemberVO">
+		select * from springmember where id = #{id}
+	</select>
+	
+	<!-- 수정하기  -->
+	<update id="updateMember" parameterType="org.member.mybatis.vo.MemberVO">
+		update springmember set pass=#{id}, name=#{name}, addr=#{addr}, memo=#{memo} where id = #{id}
+	</update>
+	
+	<select id="zipSearch" parameterType="String" resultType="org.member.mybatis.vo.ZipCodeVO">
+		select * from zipcode where dong like '%' || #{dong} || '%'
+	</select>
+
+</mapper>
